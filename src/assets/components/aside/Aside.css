@@ -1,0 +1,8 @@
+.tareas-container{
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-azul) transparent;
+}
+
+.tarea:hover{
+    opacity: .5;
+}
