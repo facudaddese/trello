@@ -3,8 +3,7 @@ import { BoardContext } from '../boardContext/BoardContext';
 
 const Input = () => {
 
-    const { input, handleInput } = useContext(BoardContext);
-    const { handleArray } = useContext(BoardContext);
+    const { input, handleInput, handleArray } = useContext(BoardContext);
 
     return (
         <div className="flex gap-7 p-3 justify-center rounded-[10px] ">
