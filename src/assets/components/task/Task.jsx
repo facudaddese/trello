@@ -11,7 +11,15 @@ const Task = ({ id, tarea }) => {
     }
 
     return (
-        <div {...attributes} {...listeners} ref={setNodeRef} style={style} key={id} className="shadow-xl tarea wrap-break-word p-2 border rounded-[10px] border-gray-400 cursor-pointer">{tarea}</div>
+        <div key={id} className="flex justify-between shadow-xl p-2 border rounded-[10px] border-gray-400 cursor-pointer">
+            <div {...attributes} {...listeners} ref={setNodeRef} style={style} className="flex flex-1 wrap-break-word tarea">
+                {tarea}
+            </div>
+            <div className="flex gap-2">
+                <span className="material-symbols-outlined">edit</span>
+                <span className="material-symbols-outlined">delete</span>
+            </div>
+        </div>
     )
 }
 

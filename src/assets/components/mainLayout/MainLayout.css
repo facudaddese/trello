@@ -1,8 +1,7 @@
-.container {
+.main-layout {
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
     grid-template-areas:
         "aside board"
-        "footer footer"
-    ;
+        "footer footer";
 }

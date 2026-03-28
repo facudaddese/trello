@@ -7,7 +7,7 @@ export const useTareas = (input, setInput) => {
     const handleArray = () => {
         if (input.trim() === '') return;
 
-        setArray([...array, { id: crypto.randomUUID(), tarea: input }]);
+        setArray((array) => [...array, { id: crypto.randomUUID(), tarea: input }]);
         setInput("");
     }
 

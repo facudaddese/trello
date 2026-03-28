@@ -10,7 +10,7 @@ const BoardContainer = () => {
     const { arrayColumns } = useContext(BoardContext);
 
     return (
-        <div className="flex items-start flex-nowrap h-[85%] p-4 gap-x-6 overflow-x-auto tareas-en-board">
+        <div className="flex min-w-0 w-full h-[75dvh] overflow-x-auto overflow-y-hidden items-start flex-nowrap p-4 gap-x-6 tareas-board">
             <SortableContext items={arrayColumns} strategy={horizontalListSortingStrategy}>
                 {
                     arrayColumns.map((el) => (<ItemBoard key={el.id} id={el.id} label={el.label} tareas={el.tareas} />))
