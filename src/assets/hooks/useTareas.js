@@ -12,10 +12,7 @@ export const useTareas = (input, setInput) => {
         setInput("");
     }
 
-    const handleUpdateTask = (id) => {
-        console.log(id);
-
-    }
+    const handleUpdateTask = (id, newValue) => { setArray(array => array.map((t) => t.id === id ? { ...t, tarea: newValue } : t)); }
 
     const handleDeleteTask = (id) => { setArray(array => array.filter((t) => t.id !== id)); }
 
