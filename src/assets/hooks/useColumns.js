@@ -2,15 +2,11 @@ import { useState } from "react"
 
 export const useColumns = () => {
 
-    const [arrayColumns, setArrayColumns] = useState(
-        [
-            { id: `col:${crypto.randomUUID()}`, label: "Este mes", tareas: [] },
-            { id: `col:${crypto.randomUUID()}`, label: "Este año", tareas: [] }
-        ]);
+    const [arrayColumns, setArrayColumns] = useState([{ id: `col:${crypto.randomUUID()}`, label: "Titulo por defecto", tareas: [] }]);
 
-    const handleArrayColumns = (label) => {
-        setArrayColumns((arrayColumns) => [...arrayColumns, { id: `col:${crypto.randomUUID()}`, label, tareas: [] }]);
-    }
+    const handleArrayColumns = () => { setArrayColumns(arrayColumns => [...arrayColumns, { id: `col:${crypto.randomUUID()}`, label: "Titulo por defecto", tareas: [] }]); }
 
-    return { arrayColumns, setArrayColumns, handleArrayColumns }
+    const handleDeleteColumns = (id) => { setArrayColumns(arrayColumns => arrayColumns.filter((c) => c.id !== id)); }
+
+    return { arrayColumns, setArrayColumns, handleArrayColumns, handleDeleteColumns }
 }

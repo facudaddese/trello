@@ -7,9 +7,17 @@ export const useTareas = (input, setInput) => {
     const handleArray = () => {
         if (input.trim() === '') return;
 
-        setArray((array) => [...array, { id: crypto.randomUUID(), tarea: input }]);
+        setArray(array => [...array, { id: crypto.randomUUID(), tarea: input }]);
+
         setInput("");
     }
 
-    return { array, setArray, handleArray }
+    const handleUpdateTask = (id) => {
+        console.log(id);
+
+    }
+
+    const handleDeleteTask = (id) => { setArray(array => array.filter((t) => t.id !== id)); }
+
+    return { array, setArray, handleArray, handleUpdateTask, handleDeleteTask }
 }

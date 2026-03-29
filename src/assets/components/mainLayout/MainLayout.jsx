@@ -8,11 +8,13 @@ import { useDragEnd } from "../../hooks/useDragEnd"
 import Task from "../task/Task";
 import ItemBoard from "../ItemBoard/ItemBoard";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { useDragOver } from "../../hooks/useDragOver";
 
 const MainLayout = () => {
 
     const { active, handleDragStart } = useDragStart();
     const { handleDragEnd } = useDragEnd();
+    const { handleDragOver } = useDragOver();
     const sensores = useSensors(
         useSensor(PointerSensor),
         useSensor(TouchSensor),
@@ -21,7 +23,7 @@ const MainLayout = () => {
 
     return (
         <div className="grid h-dvh w-full p-3 gap-x-3 overflow-x-hidden main-layout">
-            <DndContext sensors={sensores} collisionDetection={closestCorners} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+            <DndContext sensors={sensores} collisionDetection={closestCorners} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
                 <Aside />
                 <Board />
                 <DragOverlay style={{ opacity: 0.3, boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>

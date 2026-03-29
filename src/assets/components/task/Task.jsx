@@ -1,7 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities";
 
-const Task = ({ id, tarea }) => {
+const Task = ({ id, tarea, onUpdate, onDelete }) => {
 
     const { attributes, listeners, setNodeRef, transition, transform } = useSortable({ id });
 
@@ -16,8 +16,8 @@ const Task = ({ id, tarea }) => {
                 {tarea}
             </div>
             <div className="flex gap-2">
-                <span className="material-symbols-outlined">edit</span>
-                <span className="material-symbols-outlined">delete</span>
+                <span onClick={() => onUpdate(id)} className="material-symbols-outlined">edit</span>
+                <span onClick={() => onDelete(id)} className="material-symbols-outlined">delete</span>
             </div>
         </div>
     )

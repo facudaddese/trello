@@ -4,11 +4,11 @@ import { useInput } from "../../hooks/useInput";
 import TaskBoard from "../taskBoard/TaskBoard";
 import { useDroppable } from "@dnd-kit/core";
 
-const ItemBoard = ({ id, label, tareas }) => {
+const ItemBoard = ({ id, label, tareas, onClick }) => {
 
     const { attributes, listeners, setNodeRef, transition, transform } = useSortable({ id });
     const { input, handleInput } = useInput();
-    const { setNodeRef: setDropRef } = useDroppable({ id })
+    const { setNodeRef: setDropRef } = useDroppable({ id: `drop:${id}` });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -16,12 +16,12 @@ const ItemBoard = ({ id, label, tareas }) => {
     }
 
     return (
-        <div {...attributes} ref={setNodeRef} style={style} className="p-2 gap-4 bg-(--color-blanco) max-w-100 rounded-[10px] border" >
+        <div ref={setNodeRef} style={style} className="p-2 gap-4 bg-(--color-blanco) max-w-100 rounded-[10px] border" >
             <div className="flex items-center justify-between">
                 <input type="text" placeholder={`${label}`} value={input} onChange={handleInput} className="text-gray-500 wrap-break-word hover:outline outline-gray-300" />
                 <div className='flex gap-x-2 items-center'>
-                    <span {...listeners} className="material-symbols-outlined cursor-grab">drag_indicator</span>
-                    <span className="material-symbols-outlined cursor-pointer">close</span>
+                    <span {...attributes} {...listeners} className="material-symbols-outlined cursor-grab">drag_indicator</span>
+                    <span onClick={() => onClick(id)} className="material-symbols-outlined cursor-pointer">close</span>
                 </div>
             </div>
             <div ref={setDropRef} className="flex flex-col pt-4 pb-4 gap-3 overflow-y-auto max-h-120">

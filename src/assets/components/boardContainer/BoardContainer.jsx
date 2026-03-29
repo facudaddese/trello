@@ -7,16 +7,16 @@ import { BoardContext } from "../boardContext/BoardContext"
 
 const BoardContainer = () => {
 
-    const { arrayColumns } = useContext(BoardContext);
+    const { arrayColumns, handleArrayColumns, handleDeleteColumns } = useContext(BoardContext);
 
     return (
         <div className="flex min-w-0 w-full h-[75dvh] overflow-x-auto overflow-y-hidden items-start flex-nowrap p-4 gap-x-6 tareas-board">
             <SortableContext items={arrayColumns} strategy={horizontalListSortingStrategy}>
                 {
-                    arrayColumns.map((el) => (<ItemBoard key={el.id} id={el.id} label={el.label} tareas={el.tareas} />))
+                    arrayColumns.map((el) => (<ItemBoard key={el.id} onClick={handleDeleteColumns} id={el.id} label={el.label} tareas={el.tareas} />))
                 }
             </SortableContext>
-            <AddBoard label="Añade otra lista" />
+            <AddBoard label="Añade una lista" onClick={handleArrayColumns} />
         </div>
     )
 }
