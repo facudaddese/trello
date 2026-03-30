@@ -15,8 +15,8 @@ const Task = ({ id, tarea, onUpdate, onDelete }) => {
 
     const handleInput = ({ target }) => { setInput(target.value); }
 
-    const handleConfirm = (e) => {
-        if (e.key !== "Enter") return;
+    const handleConfirm = ({ key }) => {
+        if (key !== "Enter") return;
 
         onUpdate(id, input);
 

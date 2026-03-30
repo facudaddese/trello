@@ -20,7 +20,7 @@ const ItemBoard = ({ id, label, tareas, onClick }) => {
     return (
         <div ref={setNodeRef} style={style} className="p-2 gap-4 bg-(--color-blanco) max-w-100 rounded-[10px] border" >
             <div className="flex items-center justify-between">
-                <input ref={inputRef} type="text" placeholder={`${label}`} value={input} onChange={handleInput} onKeyDown={(e) => { if (e.key === "Enter") inputRef.current?.blur(); }} onClick={() => { inputRef.current?.focus(); }} className="text-gray-500 wrap-break-word hover:outline outline-gray-300" />
+                <input ref={inputRef} type="text" placeholder={`${label}`} value={input} onChange={handleInput} onKeyDown={({ key }) => { if (key === "Enter") inputRef.current?.blur(); }} onClick={() => { inputRef.current?.focus(); }} className="text-gray-500 wrap-break-word hover:outline outline-gray-300" />
                 <div className='flex gap-x-2 items-center'>
                     <span {...attributes} {...listeners} className="material-symbols-outlined cursor-grab">drag_indicator</span>
                     <span onClick={() => onClick(id)} className="material-symbols-outlined cursor-pointer">close</span>
