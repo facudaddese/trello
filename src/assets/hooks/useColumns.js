@@ -1,12 +1,35 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocalStorage } from "./useLocalStorage";
 
 export const useColumns = () => {
 
-    const [arrayColumns, setArrayColumns] = useState([{ id: `col:${crypto.randomUUID()}`, label: "Titulo por defecto", tareas: [] }]);
+    const { storedValue, setLocalStorage } = useLocalStorage("arrayColumns", [{ id: `col:${crypto.randomUUID()}`, label: "Primera columna", tareas: [] }]);
+    const [arrayColumns, setArrayColumns] = useState(storedValue);
 
-    const handleArrayColumns = () => { setArrayColumns(arrayColumns => [...arrayColumns, { id: `col:${crypto.randomUUID()}`, label: "Titulo por defecto", tareas: [] }]); }
+    const handleArrayColumns = () => {
+        const newArrayColumns = [...arrayColumns, { id: `col:${crypto.randomUUID()}`, label: "Elige un título", tareas: [] }]
 
-    const handleDeleteColumns = (id) => { setArrayColumns(arrayColumns => arrayColumns.filter((c) => c.id !== id)); }
+        setArrayColumns(newArrayColumns);
+        setLocalStorage(newArrayColumns);
+    }
 
-    return { arrayColumns, setArrayColumns, handleArrayColumns, handleDeleteColumns }
+    const handleUpdateColumns = (id, newLabel) => {
+        const newArrayColumns = arrayColumns.map((col) => col.id === id ? { ...col, label: newLabel } : col);
+
+        setArrayColumns(newArrayColumns);
+        setLocalStorage(newArrayColumns);
+    }
+
+    const handleDeleteColumns = (id) => {
+        const newArrayColumns = arrayColumns.filter((c) => c.id !== id);
+
+        setArrayColumns(newArrayColumns);
+        setLocalStorage(newArrayColumns);
+    }
+
+    useEffect(() => {
+        setLocalStorage(arrayColumns);
+    }, [arrayColumns, setLocalStorage]);
+
+    return { arrayColumns, setArrayColumns, handleArrayColumns, handleUpdateColumns, handleDeleteColumns }
 }

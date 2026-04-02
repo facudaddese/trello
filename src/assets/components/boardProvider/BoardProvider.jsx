@@ -8,10 +8,10 @@ const BoardProvider = () => {
 
     const { input, setInput, handleInput } = useInput();
     const { array, setArray, handleArray, handleUpdateTask, handleDeleteTask } = useTareas(input, setInput);
-    const { arrayColumns, setArrayColumns, handleArrayColumns, handleDeleteColumns } = useColumns();
+    const { arrayColumns, setArrayColumns, handleArrayColumns, handleUpdateColumns, handleDeleteColumns } = useColumns();
 
     return (
-        <BoardContext.Provider value={{ input, handleInput, array, setArray, handleArray, arrayColumns, setArrayColumns, handleArrayColumns, handleDeleteColumns, handleUpdateTask, handleDeleteTask }}>
+        <BoardContext.Provider value={{ input, handleInput, array, setArray, handleArray, arrayColumns, setArrayColumns, handleArrayColumns, handleUpdateColumns, handleDeleteColumns, handleUpdateTask, handleDeleteTask }}>
             <MainLayout />
         </BoardContext.Provider>
     )

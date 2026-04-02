@@ -1,7 +1,6 @@
 import { closestCorners, DndContext, DragOverlay, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import Aside from "../aside/Aside";
 import Board from "../board/Board";
-import Footer from "../footer/Footer";
 import './MainLayout.css'
 import { useDragStart } from "../../hooks/useDragStart";
 import { useDragEnd } from "../../hooks/useDragEnd"
@@ -16,7 +15,6 @@ const MainLayout = () => {
     const { handleDragEnd } = useDragEnd();
     const { handleDragOver } = useDragOver();
     const sensores = useSensors(
-        useSensor(PointerSensor),
         useSensor(TouchSensor),
         useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
     )
@@ -34,7 +32,6 @@ const MainLayout = () => {
                     }
                 </DragOverlay>
             </DndContext>
-            <Footer />
         </div>
     )
 }

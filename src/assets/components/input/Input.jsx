@@ -1,9 +1,4 @@
-import { useContext } from 'react';
-import { BoardContext } from '../boardContext/BoardContext';
-
-const Input = () => {
-
-    const { input, handleInput, handleArray } = useContext(BoardContext);
+const Input = ({ input, handleInput, handleArray }) => {
 
     return (
         <div className="flex gap-7 p-3 justify-center rounded-[10px] ">

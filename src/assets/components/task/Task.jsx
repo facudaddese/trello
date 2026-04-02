@@ -17,9 +17,7 @@ const Task = ({ id, tarea, onUpdate, onDelete }) => {
 
     const handleConfirm = ({ key }) => {
         if (key !== "Enter") return;
-
         onUpdate(id, input);
-
         setEdit(false);
     }
 

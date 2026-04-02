@@ -5,10 +5,10 @@ import TaskBoard from "../taskBoard/TaskBoard";
 import { useDroppable } from "@dnd-kit/core";
 import { useRef } from "react";
 
-const ItemBoard = ({ id, label, tareas, onClick }) => {
+const ItemBoard = ({ id, label, tareas, onClick, onUpdate }) => {
 
     const { attributes, listeners, setNodeRef, transition, transform } = useSortable({ id });
-    const { input, handleInput } = useInput();
+    const { input, handleInput } = useInput(label);
     const { setNodeRef: setDropRef } = useDroppable({ id: `drop:${id}` });
     const inputRef = useRef(null);
 
@@ -20,7 +20,7 @@ const ItemBoard = ({ id, label, tareas, onClick }) => {
     return (
         <div ref={setNodeRef} style={style} className="p-2 gap-4 bg-(--color-blanco) max-w-100 rounded-[10px] border" >
             <div className="flex items-center justify-between">
-                <input ref={inputRef} type="text" placeholder={`${label}`} value={input} onChange={handleInput} onKeyDown={({ key }) => { if (key === "Enter") inputRef.current?.blur(); }} onClick={() => { inputRef.current?.focus(); }} className="text-gray-500 wrap-break-word hover:outline outline-gray-300" />
+                <input ref={inputRef} type="text" placeholder={`${label}`} onBlur={() => onUpdate(id, input)} value={input} onChange={handleInput} onKeyDown={({ key }) => { if (key === "Enter") inputRef.current?.blur(); }} onClick={() => { inputRef.current?.focus(); }} className="text-gray-500 wrap-break-word hover:outline outline-gray-300" />
                 <div className='flex gap-x-2 items-center'>
                     <span {...attributes} {...listeners} className="material-symbols-outlined cursor-grab">drag_indicator</span>
                     <span onClick={() => onClick(id)} className="material-symbols-outlined cursor-pointer">close</span>
@@ -30,7 +30,7 @@ const ItemBoard = ({ id, label, tareas, onClick }) => {
                 <SortableContext items={tareas} strategy={verticalListSortingStrategy}>
                     {
                         tareas.length === 0 ?
-                            <div className="flex items-center gap-2 text-gray-500">
+                            <div className="flex items-center ml-2 mr-2 gap-2 text-gray-500 hover:outline outline-gray-300 cursor-pointer">
                                 <span className="material-symbols-outlined">add</span>
                                 <span>Añade una tarea</span>
                             </div>
