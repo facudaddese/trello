@@ -1,8 +1,15 @@
-.tareas-container{
+.tareas-container {
     scrollbar-width: thin;
     scrollbar-color: var(--color-azul) transparent;
 }
 
-.tarea:hover{
+.tarea:hover {
     opacity: .5;
+}
+
+@media (max-width:650px) {
+
+    .aside {
+        display: none;
+    }
 }

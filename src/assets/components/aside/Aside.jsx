@@ -12,7 +12,7 @@ const Aside = () => {
     const { setNodeRef } = useDroppable({ id: "aside" });
 
     return (
-        <aside className="gap-4 flex flex-col flex-nowrap rounded-[20px] border-gray-300 w-77 [grid-area:aside] overflow-hidden bg-sky-100 touch-none h-full">
+        <aside className="gap-4 flex flex-col flex-nowrap rounded-[20px] border-gray-300 w-77 [grid-area:aside] overflow-hidden bg-sky-100 touch-none h-full aside">
             <Input input={input} handleInput={handleInput} handleArray={handleArray} />
             <div ref={setNodeRef} className={`flex tareas-container overflow-y-auto h-dvh ${array.length === 0 ? "mt-20 justify-center" : "flex-col gap-3 pb-3 pl-2 pr-2"}`}>
                 <SortableContext items={array} strategy={verticalListSortingStrategy}>

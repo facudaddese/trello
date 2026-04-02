@@ -12,7 +12,7 @@ const TaskBoard = ({ tarea, id }) => {
 
     return (
         <div className="flex items-center gap-3 border border-gray-300 p-2 rounded-[10px] hover:border-gray-500 cursor-pointer">
-            <input type="checkbox" name="" id="" className="w-4 h-4 cursor-pointer" />
+            <input type="checkbox" className="w-4 h-4 cursor-pointer" />
             <div {...attributes} {...listeners} ref={setNodeRef} style={style} className="wrap-break-word w-full">
                 {tarea}
             </div>

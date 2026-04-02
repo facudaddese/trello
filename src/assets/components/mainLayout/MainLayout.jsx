@@ -8,16 +8,29 @@ import Task from "../task/Task";
 import ItemBoard from "../ItemBoard/ItemBoard";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { useDragOver } from "../../hooks/useDragOver";
+import { useEffect, useState } from "react";
 
 const MainLayout = () => {
+
+    const [resize, setResize] = useState(innerWidth <= 650);
 
     const { active, handleDragStart } = useDragStart();
     const { handleDragEnd } = useDragEnd();
     const { handleDragOver } = useDragOver();
     const sensores = useSensors(
-        useSensor(TouchSensor),
+        useSensor(resize ? TouchSensor : PointerSensor),
         useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-    )
+    );
+
+    useEffect(() => {
+        const handleResize = () => {
+            setResize(innerWidth);
+        }
+
+        addEventListener("resize", handleResize);
+
+        return () => removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <div className="grid h-dvh w-full p-3 gap-x-3 overflow-x-hidden main-layout">

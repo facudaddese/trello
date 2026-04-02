@@ -5,3 +5,12 @@
         "aside board"
         "aside board";
 }
+
+@media (max-width:650px) {
+    
+    .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "board";
+    }
+}

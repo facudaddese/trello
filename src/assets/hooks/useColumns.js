@@ -13,6 +13,13 @@ export const useColumns = () => {
         setLocalStorage(newArrayColumns);
     }
 
+    const handleTaskToColumn = (id, tarea) => {
+        const newArrayColumns = arrayColumns.map((col) => col.id === id ? { ...col, tareas: [...col.tareas, { id: crypto.randomUUID(), tarea }] } : col);
+
+        setArrayColumns(newArrayColumns);
+        setLocalStorage(newArrayColumns);
+    }
+
     const handleUpdateColumns = (id, newLabel) => {
         const newArrayColumns = arrayColumns.map((col) => col.id === id ? { ...col, label: newLabel } : col);
 
@@ -31,5 +38,5 @@ export const useColumns = () => {
         setLocalStorage(arrayColumns);
     }, [arrayColumns, setLocalStorage]);
 
-    return { arrayColumns, setArrayColumns, handleArrayColumns, handleUpdateColumns, handleDeleteColumns }
+    return { arrayColumns, setArrayColumns, handleArrayColumns, handleTaskToColumn, handleUpdateColumns, handleDeleteColumns }
 }

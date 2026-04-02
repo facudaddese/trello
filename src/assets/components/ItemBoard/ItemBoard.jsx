@@ -3,18 +3,33 @@ import { CSS } from "@dnd-kit/utilities";
 import { useInput } from "../../hooks/useInput";
 import TaskBoard from "../taskBoard/TaskBoard";
 import { useDroppable } from "@dnd-kit/core";
-import { useRef } from "react";
+import { useContext, useRef, useState } from "react";
+import { BoardContext } from "../boardContext/BoardContext";
 
 const ItemBoard = ({ id, label, tareas, onClick, onUpdate }) => {
 
+    const { handleTaskToColumn } = useContext(BoardContext);
     const { attributes, listeners, setNodeRef, transition, transform } = useSortable({ id });
     const { input, handleInput } = useInput(label);
     const { setNodeRef: setDropRef } = useDroppable({ id: `drop:${id}` });
     const inputRef = useRef(null);
+    const [newInput, setNewInput] = useState("");
+    const [addingTask, setAddingTask] = useState(false);
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition
+    }
+
+    const handleConfirmTask = () => {
+        if (newInput.trim() === "") {
+            setAddingTask(!addingTask);
+            return;
+        }
+
+        handleTaskToColumn(id, newInput);
+        setNewInput("");
+        setAddingTask(!addingTask);
     }
 
     return (
@@ -29,13 +44,20 @@ const ItemBoard = ({ id, label, tareas, onClick, onUpdate }) => {
             <div ref={setDropRef} className="flex flex-col pt-4 pb-4 gap-3 overflow-y-auto max-h-120">
                 <SortableContext items={tareas} strategy={verticalListSortingStrategy}>
                     {
-                        tareas.length === 0 ?
-                            <div className="flex items-center ml-2 mr-2 gap-2 text-gray-500 hover:outline outline-gray-300 cursor-pointer">
-                                <span className="material-symbols-outlined">add</span>
-                                <span>Añade una tarea</span>
-                            </div>
-                            : tareas.map((el) => (<TaskBoard key={el.id} tarea={el.tarea} id={el.id} />))
+                        tareas.map((el) => (<TaskBoard key={el.id} tarea={el.tarea} id={el.id} />))
                     }
+                    {
+                        addingTask &&
+                        <div className="flex items-center gap-3 border border-gray-300 p-2 rounded-[10px]">
+                            <input type="checkbox" className="w-4 h-4 cursor-pointer" />
+                            <input autoFocus type="text" placeholder="Añade una tarea" value={newInput} onChange={({ target }) => setNewInput(target.value)} onKeyDown={({ key }) => { if (key === "Enter") handleConfirmTask(); }} onBlur={handleConfirmTask} className="wrap-break-word hover:outline outline-gray-300" />
+                        </div>
+                    }
+                    <div onClick={() => setAddingTask(!addingTask)} className="flex items-center ml-2 mr-2 gap-2 text-gray-500 cursor-pointer">
+                        <span className="material-symbols-outlined">add</span>
+                        <span>Añade una tarea</span>
+                    </div>
+
                 </SortableContext>
             </div>
         </div >
