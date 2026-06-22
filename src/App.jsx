@@ -1,4 +1,4 @@
-import BoardProvider from "./assets/components/boardProvider/BoardProvider";
+import BoardProvider from "./components/boardProvider/BoardProvider";
 
 function App() {
   return (
