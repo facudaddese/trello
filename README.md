@@ -1,7 +1,7 @@
 
-# Trello
+# Task Manager
 
-Aplicación estilo Trello construida con React. Los usuarios pueden crear tareas, organizarlas en columnas personalizadas y reordenarlas mediante drag & drop, todo con persistencia en LocalStorage para que el estado se mantenga entre sesiones.[Ver sitio](https://trello-by-daddese.netlify.app/)
+Aplicación estilo tablero Kanban construida con React. Los usuarios pueden crear tareas, organizarlas en columnas personalizadas y reordenarlas mediante drag & drop, todo con persistencia en LocalStorage para que el estado se mantenga entre sesiones.[Ver sitio](https://taskmanager-fd.netlify.app/)
 
 ---
 
